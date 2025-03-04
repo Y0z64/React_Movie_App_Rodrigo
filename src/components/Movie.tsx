@@ -12,6 +12,7 @@ import {
   getDoc,
 } from "firebase/firestore";
 import { toast } from "sonner";
+import { RatingStars } from "./RatingStars";
 
 type Props = {
   movie: MovieType;
@@ -137,24 +138,27 @@ export default function Movie({ movie }: Props) {
       className="bg-card relative outline-dotted hover:outline-none rounded-lg shadow-lg overflow-hidden transform transition duration-200 hover:scale-105"
     >
       {user && (
-        <Button
-          variant="outline"
-          className={`dark:text-white absolute top-2 right-2 z-10 hover:outline ${
-            isLoading ? "opacity-50 cursor-not-allowed" : ""
-          }`}
-          size={"icon"}
-          onClick={(e) => {
-            e.preventDefault();
-            toggleFavorite();
-          }}
-          disabled={
-            isLoading ||
-            addToFavorites.isPending ||
-            removeFromFavorites.isPending
-          }
-        >
-          <Heart className={isFavorite ? "fill-red-400 text-red-400" : ""} />
-        </Button>
+        <>
+          <Button
+            variant="outline"
+            className={`dark:text-white absolute top-2 right-2 z-10 hover:outline ${
+              isLoading ? "opacity-50 cursor-not-allowed" : ""
+            }`}
+            size={"icon"}
+            onClick={(e) => {
+              e.preventDefault();
+              toggleFavorite();
+            }}
+            disabled={
+              isLoading ||
+              addToFavorites.isPending ||
+              removeFromFavorites.isPending
+            }
+          >
+            <Heart className={isFavorite ? "fill-red-400 text-red-400" : ""} />
+          </Button>
+          <RatingStars movie={movie} />
+        </>
       )}
       <div className="relative pb-[150%]">
         <img
