@@ -23,13 +23,15 @@ import {
 } from "firebase/auth";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 
+
+
 const firebaseConfig = {
-  apiKey: "AIzaSyDkAll-0tf_CB9F9d8jXlxkWY5JkuXYQpE",
-  authDomain: "breta-app-v2-ys5np7.firebaseapp.com",
-  projectId: "breta-app-v2-ys5np7",
-  storageBucket: "breta-app-v2-ys5np7.appspot.com",
-  messagingSenderId: "186396922879",
-  appId: "1:186396922879:web:5c65143abac265c4608dca",
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_FIREBASE_APP_ID,
 };
 
 
