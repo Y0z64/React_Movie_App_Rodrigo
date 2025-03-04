@@ -1,4 +1,4 @@
-import { Star } from "lucide-react";
+import { Heart } from "lucide-react";
 import { Movie as MovieType } from "../context/MovieProvider";
 import { Button } from "./ui/button";
 import { useAuth } from "@/hooks/useAuth";
@@ -24,7 +24,11 @@ export default function Movie({ movie }: Props) {
   const [isFavorite, setIsFavorite] = useState<boolean>(false);
 
   // Check if movie is favorited
-  const { data: favoriteStatus, isLoading, error} = useQuery({
+  const {
+    data: favoriteStatus,
+    isLoading,
+    error,
+  } = useQuery({
     queryKey: ["favorite", user?.uid, movie.id],
     queryFn: async () => {
       if (!user) return false;
@@ -57,7 +61,6 @@ export default function Movie({ movie }: Props) {
       setIsFavorite(favoriteStatus);
     }
   }, [favoriteStatus]);
-  
 
   // Add to favorites mutation
   const addToFavorites = useMutation({
@@ -90,9 +93,8 @@ export default function Movie({ movie }: Props) {
     onError: (e) => {
       toast.error("Could not add to favorites", {
         description: e.message,
-        
-      })
-    }
+      });
+    },
   });
 
   // Remove from favorites mutation
@@ -141,16 +143,17 @@ export default function Movie({ movie }: Props) {
             isLoading ? "opacity-50 cursor-not-allowed" : ""
           }`}
           size={"icon"}
-          onClick={toggleFavorite}
+          onClick={(e) => {
+            e.preventDefault();
+            toggleFavorite();
+          }}
           disabled={
             isLoading ||
             addToFavorites.isPending ||
             removeFromFavorites.isPending
           }
         >
-          <Star
-            className={isFavorite ? "fill-yellow-400 text-yellow-400" : ""}
-          />
+          <Heart className={isFavorite ? "fill-red-400 text-red-400" : ""} />
         </Button>
       )}
       <div className="relative pb-[150%]">

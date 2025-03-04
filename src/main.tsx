@@ -7,8 +7,10 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Route, Switch } from "wouter";
 import { SidebarProvider } from "./components/ui/sidebar.tsx";
 import { MovieProvider } from "./context/MovieProvider.tsx";
-import Dashboard from "./Pages/Dashboard.tsx";
+import Dashboard from "./pages/Dashboard.tsx";
 import { Toaster } from "sonner";
+import Account from "./pages/Account.tsx";
+import Main from "./pages/Main.tsx";
 
 const queryClient = new QueryClient();
 
@@ -19,10 +21,13 @@ createRoot(document.getElementById("root")!).render(
         <MovieProvider>
           <Toaster />
           <SidebarProvider>
-            <Switch>
-              <Route path={"/"} component={App} />
-              <Route path={"/dashboard"} component={Dashboard} />
-            </Switch>
+            <Main>
+              <Switch>
+                <Route path={"/"} component={App} />
+                <Route path={"/dashboard"} component={Dashboard} />
+                <Route path={"/account"} component={Account} />
+              </Switch>
+            </Main>
           </SidebarProvider>
         </MovieProvider>
       </ThemeProvider>
