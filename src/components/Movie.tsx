@@ -129,7 +129,8 @@ export default function Movie({ movie }: Props) {
   };
 
   return (
-    <div
+    <a
+      href={`https://www.themoviedb.org/movie/${movie.id}`}
       key={movie.id}
       className="bg-card relative outline-dotted hover:outline-none rounded-lg shadow-lg overflow-hidden transform transition duration-200 hover:scale-105"
     >
@@ -169,6 +170,6 @@ export default function Movie({ movie }: Props) {
           </p>
         )}
       </div>
-    </div>
+    </a>
   );
 }
